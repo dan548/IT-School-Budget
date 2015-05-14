@@ -42,6 +42,9 @@
     <string name="text_add">Add</string>
     <string name="text_call">Call</string>
 
+    <string name="date_spent">Date:</string>
+    <string name="sum_spent">Sum:</string>
+
 
 
 </resources>

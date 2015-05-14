@@ -28,8 +28,7 @@
         <activity android:name=".SpentListActivity"/>
         <activity android:name=".ChooseNumberActivity"
             android:theme="@style/Dialog"/>
-        <activity android:name=".DialerActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".DialerActivity"/>
     </application>
 
 </manifest>

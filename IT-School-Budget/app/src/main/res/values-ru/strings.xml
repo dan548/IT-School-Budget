@@ -34,4 +34,6 @@
     <string name="hint_phone_2">Введите номер телефона</string>
     <string name="text_add">Добавить</string>
     <string name="text_call">Позвонить</string>
+    <string name="date_spent">Дата приобретения продукта:</string>
+    <string name="sum_spent">Цена продукта:</string>
 </resources>

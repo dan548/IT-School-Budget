@@ -1,15 +1,14 @@
 package ru.itsschoolsamsung.budget;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class DialerActivity extends AppCompatActivity {
+public class DialerActivity extends Activity {
 
     private EditText phoneEdit;
 
@@ -21,8 +20,6 @@ public class DialerActivity extends AppCompatActivity {
         phoneEdit = (EditText) findViewById(R.id.phoneEdit);
         phoneEdit.setText("+7");
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
     }
 
     public void callClick(View v) {

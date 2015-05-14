@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -190,9 +191,14 @@ public class PeopleListActivity extends Activity {
                         return true;
                     case R.id.menu4:
                         setNumbers();
+                        if (!phone_two.equals("+7")) {
                         intChoose.putExtra("phone1", phone_one);
                         intChoose.putExtra("phone2", phone_two);
                         startActivity(intChoose);
+                        }
+                        else {
+                            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone_one)));
+                        }
                         return true;
                     default:
                         return false;

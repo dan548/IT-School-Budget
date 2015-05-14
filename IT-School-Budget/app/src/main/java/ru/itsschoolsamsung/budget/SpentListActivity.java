@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -61,6 +62,10 @@ public class SpentListActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String text = parent.getAdapter().getItem(position).toString();
                 budgetID = getIDContact(text);
+                setNames();
+                Toast.makeText(SpentListActivity.this, getResources().getString(R.string.date_spent) + " "
+                        + date + "\n" + getResources().getString(R.string.sum_spent) + " " + sum + " "
+                        + getResources().getString(R.string.rubles), Toast.LENGTH_LONG).show();
                 showPopupMenu(view);
             }
         });
@@ -117,7 +122,6 @@ public class SpentListActivity extends Activity {
                 switch (item.getItemId()){
                     //редактирование записи
                     case R.id.menu_edit:
-                        setNames();
                         flag = false;
                         intSpent.putExtra("key1",flag);
                         intSpent.putExtra("key2",product);
@@ -162,12 +166,10 @@ public class SpentListActivity extends Activity {
     private void refreshSpent(){
         //обновление набора данных
         arrayBudget = new ArrayList<>();
-        String selectQuery = "SELECT spent_Date, spent_Product, spent_Sum FROM Spent ORDER BY spent_Date;";
+        String selectQuery = "SELECT spent_Product FROM Spent ORDER BY spent_Date;";
         Cursor cursor = sqLiteDatabase.rawQuery(selectQuery,null);
         while (cursor.moveToNext()){
-            String field = cursor.getString(cursor.getColumnIndex("spent_Date"))+" "
-                    +cursor.getString(cursor.getColumnIndex("spent_Product"))+" "
-                    +cursor.getString(cursor.getColumnIndex("spent_Sum"));
+            String field = cursor.getString(cursor.getColumnIndex("spent_Product"));
             arrayBudget.add(field);
         }
         stringArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayBudget);
@@ -176,7 +178,7 @@ public class SpentListActivity extends Activity {
     }
 
     private long getIDContact(String text){
-        String query = "SELECT _id FROM Spent WHERE spent_Date || ' ' || spent_Product || ' ' || spent_Sum LIKE '"+text+"';";
+        String query = "SELECT _id FROM Spent WHERE spent_Product LIKE '"+text+"';";
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
         cursor.moveToFirst();
         long id = cursor.getLong(cursor.getColumnIndex("_id"));
