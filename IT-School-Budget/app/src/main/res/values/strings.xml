@@ -45,6 +45,8 @@
     <string name="date_spent">Date:</string>
     <string name="sum_spent">Sum:</string>
 
+    <string name="choose_date">Choose date</string>
+
 
 
 </resources>

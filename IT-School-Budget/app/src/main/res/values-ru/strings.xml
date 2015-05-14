@@ -36,4 +36,5 @@
     <string name="text_call">Позвонить</string>
     <string name="date_spent">Дата приобретения продукта:</string>
     <string name="sum_spent">Цена продукта:</string>
+    <string name="choose_date">Выберите дату</string>
 </resources>

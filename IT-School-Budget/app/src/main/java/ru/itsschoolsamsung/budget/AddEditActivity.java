@@ -11,9 +11,11 @@ import android.widget.Toast;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class AddEditActivity extends Activity{
 
+    private boolean isExpanded;
     private boolean flag;
     private EditText surname;
     private EditText name;
@@ -35,6 +37,9 @@ public class AddEditActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit);
 
+        final FloatingActionButton fab_number = (FloatingActionButton) findViewById(R.id.fab_add);
+
+        isExpanded = false;
 
         Bundle extras = getIntent().getExtras();
         surname = (EditText)findViewById(R.id.surname);
@@ -76,6 +81,31 @@ public class AddEditActivity extends Activity{
             phone2.setText("+7");
         }
 
+        if (!phone2.getText().toString().equals("+7")) {
+            phone2.setVisibility(View.VISIBLE);
+            fab_number.setImageResource(R.drawable.ic_action_content_new_lol);
+            isExpanded = true;
+        }
+
+
+        View.OnClickListener btnClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isExpanded){
+                    phone2.setVisibility(View.VISIBLE);
+                    fab_number.setImageResource(R.drawable.ic_action_content_new_lol);
+                    isExpanded = true;
+                } else {
+                    phone2.setVisibility(View.GONE);
+                    fab_number.setImageResource(R.drawable.ic_action_content_new);
+                    phone2.setText("+7");
+                    isExpanded = false;
+                }
+            }
+        };
+
+        fab_number.setOnClickListener(btnClick);
+
     }
     public void onInsertUpdate(View v){
         if (phone1.getText().toString().length() < 19 && phone1.getText().toString().length() > 4 && !surname.getText().toString().equals("") && !name.getText().toString().equals("")) {
@@ -101,8 +131,6 @@ public class AddEditActivity extends Activity{
         finish();
     }
 
-    public void addNumber(View v){
-        phone2.setVisibility(View.VISIBLE);
-    }
+
 
 }

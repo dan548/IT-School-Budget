@@ -2,15 +2,17 @@ package ru.itsschoolsamsung.budget;
 
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.Calendar;
 
 public class AddSpentActivity extends Activity {
     private boolean flag;
-    private EditText spent_date;
+    private TextView spent_date;
     private EditText product;
     private EditText sum;
     private String date;
@@ -22,11 +24,22 @@ public class AddSpentActivity extends Activity {
         setContentView(R.layout.activity_add_spent);
 
         Bundle extras = getIntent().getExtras();
-        spent_date = (EditText)findViewById(R.id.spent_date);
-        product = (EditText)findViewById(R.id.spent_product);
-        sum = (EditText)findViewById(R.id.spent_sum);
-        date = String.valueOf(c.get(Calendar.DATE)) + "." + String.valueOf(c.get(Calendar.MONTH) + 1) + "." + String.valueOf(c.get(Calendar.YEAR));
+        spent_date = (TextView)findViewById(R.id.spent_date_yo);
+        product = (EditText) findViewById(R.id.spent_product);
+        sum = (EditText) findViewById(R.id.spent_sum);
+        if(c.get(Calendar.MONTH) < 9){
+            date = String.valueOf(c.get(Calendar.DATE)) + ".0" + String.valueOf(c.get(Calendar.MONTH) + 1) + "." + String.valueOf(c.get(Calendar.YEAR));
+        } else {
+            date = String.valueOf(c.get(Calendar.DATE)) + "." + String.valueOf(c.get(Calendar.MONTH) + 1) + "." + String.valueOf(c.get(Calendar.YEAR));
+        }
 
+        spent_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment dateDialog = new DatePicker();
+                dateDialog.show(getFragmentManager(), "datePicker");
+            }
+        });
 
 
 

@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/theme_primary_dark">
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/spent_date"
+    <TextView
+        android:id="@+id/spent_date_yo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/TextEdit"
-        android:layout_margin="5dp"
-        android:inputType="number"/>
+        android:layout_margin="5dp"/>
 
     <EditText
         android:id="@+id/spent_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/TextEdit"
-        android:hint="@string/hint_spent_Product"
         android:layout_margin="5dp"/>
 
     <EditText
@@ -25,9 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/TextEdit"
-        android:hint="@string/sum"
         android:layout_margin="5dp"
-        android:inputType="number" />
+        android:inputType="number"/>
 
 
     <Button
@@ -45,5 +41,6 @@
         android:background="@drawable/ripple"
         android:layout_marginTop="10dp"
         android:onClick="btn_back"/>
+
 
 </LinearLayout>
