@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme_primary_dark">
+
+    <EditText
+        android:id="@+id/surname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextEdit"
+        android:hint="@string/hint_surname"
+        android:layout_margin="5dp"/>
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextEdit"
+        android:hint="@string/hint_name"
+        android:layout_margin="5dp"/>
+
+    <EditText
+        android:id="@+id/last_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextEdit"
+        android:hint="@string/hint_last_name"
+        android:layout_margin="5dp"/>
+
+    <EditText
+        android:id="@+id/phone_edit_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextEdit"
+        android:inputType="phone"
+        android:hint="@string/hint_phone_1"
+        android:layout_margin="5dp"/>
+
+    <EditText
+        android:id="@+id/phone_edit_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextEdit"
+        android:inputType="phone"
+        android:hint="@string/hint_phone_2"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextEdit"
+        android:id="@+id/textView2" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextEdit"
+        android:id="@+id/textView3" />
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_action_content_new"
+        fab:fab_colorNormal="@color/primary_pink"
+        fab:fab_colorPressed="@color/primary_pressed_pink"
+        fab:fab_colorRipple="@color/ripple_pink"
+        android:onClick="addNumber"/>
+
+    <Button
+        android:id="@+id/ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_ok"
+        android:onClick="onInsertUpdate"
+        android:background="@drawable/ripple"/>
+    <Button
+        android:id="@+id/back_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_back"
+        android:background="@drawable/ripple"
+        android:layout_marginTop="10dp"
+        android:onClick="btn_back"/>
+
+</LinearLayout>

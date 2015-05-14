@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ru.itsschoolsamsung.budget"
+    android:installLocation="preferExternal">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/NoActionBar" >
+        <activity android:name=".AboutActivity"/>
+        <activity android:name=".AddEditActivity"/>
+        <activity android:name=".AddPaymentActivity"/>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".PeopleListActivity"/>
+        <activity
+            android:name=".ShowBudgetActivity"
+            android:theme="@style/Dialog"/>
+        <activity
+            android:name=".AddSpentActivity"/>
+        <activity android:name=".SpentListActivity"/>
+        <activity android:name=".ChooseNumberActivity"
+            android:theme="@style/Dialog"/>
+        <activity android:name=".DialerActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+    </application>
+
+</manifest>

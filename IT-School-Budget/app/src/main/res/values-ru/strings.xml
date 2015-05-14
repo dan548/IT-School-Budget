@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Budget</string>
+    <string name="about">О приложении</string>
+    <string name="action_settings">Настройки</string>
+    <string name="cur_bud">Текущий бюджет</string>
+    <string name="exit">Выход</string>
+    <string name="hello_world">Привет, Мир!</string>
+    <string name="people">Список людей</string>
+    <string name="spend_list">Список затрат</string>
+    <string name="sum">Сумма</string>
+    <string name="trans_list">Список транзакций</string>
+    <string name="delete">Удалить</string>
+    <string name="edit">Редактировать</string>
+    <string name="hint_last_name">Введите отчество</string>
+    <string name="hint_name">Введите имя</string>
+    <string name="hint_surname">Введите фамилию</string>
+    <string name="text_back">Отмена</string>
+    <string name="text_ok">Принять</string>
+    <string name="confirm">Подтверждение</string>
+    <string name="confirm_question">Вы уверены, что хотите удалить выбранного человека?</string>
+    <string name="aboutStudent">Об ученике</string>
+    <string name="about_text">Автор: Даниил Поляков</string>
+    <string name="add_transaction">Добавить платёж</string>
+    <string name="rubles">рублей</string>
+    <string name="hint_spent_Product">Введите название продукта</string>
+    <string name="confirm_question_spent">Вы уверены, что хотите удалить выбранное?</string>
+    <string name="date">Дата последнего платежа: </string>
+    <string name="sum_payments">Общая сумма платежей: </string>
+    <string name="day">День</string>
+    <string name="month">Месяц</string>
+    <string name="year">Год</string>
+    <string name="hint_phone_1">Введите номер телефона (обязательно)</string>
+    <string name="hint_phone_2">Введите номер телефона</string>
+    <string name="text_add">Добавить</string>
+    <string name="text_call">Позвонить</string>
+</resources>
