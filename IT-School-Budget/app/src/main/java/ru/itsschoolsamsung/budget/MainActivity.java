@@ -1,28 +1,77 @@
 package ru.itsschoolsamsung.budget;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     private Intent intent2;
     private Intent intent3;
     private Intent intent4;
     private Intent intent5;
     private Intent intent6;
+    private boolean isAlertDialog;
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (prefs.getBoolean(getString(R.string.chb1), false))
+        {
+            isAlertDialog = true;
+        } else {
+            isAlertDialog = false;
+        }
+/*
+        // читаем размер шрифта из EditTextPreference
+        float fSize = Float.parseFloat(
+                prefs.getString(getString(R.string.pref_size), "20"));
+        // применяем настройки в текстовом поле
+        myEdit.setTextSize(fSize);
 
+        // читаем стили текста из ListPreference
+        String regular = prefs.getString(getString(R.string.pref_style), "");
+        int typeface = Typeface.NORMAL;
+
+        if (regular.contains("Полужирный"))
+            typeface += Typeface.BOLD;
+
+        if (regular.contains("Курсив"))
+            typeface += Typeface.ITALIC;
+
+        // меняем настройки в EditText
+        //myEdit.setTextSize(fSize);
+        myEdit.setTypeface(null, typeface);
+
+        // читаем цвет текста из CheckBoxPreference
+        // и суммируем значения для получения дополнительньк цветов текста
+        int color = Color.BLACK;
+        if (prefs.getBoolean(getString(R.string.pref_color_red), false))
+            color += Color.RED;
+        if (prefs.getBoolean(getString(R.string.pref_color_green), false))
+            color += Color.GREEN;
+        if (prefs.getBoolean(getString(R.string.pref_color_blue), false))
+            color += Color.BLUE;
+
+        myEdit.setTextColor(color);*/
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
+        setSupportActionBar(toolbar_main);
 
 
         intent2 = new Intent(MainActivity.this, PeopleListActivity.class);
@@ -47,6 +96,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 switch (v.getId()){
                     case R.id.button2:
+                        intent2.putExtra("smart_remove", isAlertDialog);
                         startActivity(intent2);
                         break;
                     case R.id.button3:
@@ -78,6 +128,8 @@ public class MainActivity extends Activity {
     }
 
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -94,6 +146,8 @@ public class MainActivity extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(MainActivity.this, Prefs.class);
+            startActivity(intent);
             return true;
         }
 

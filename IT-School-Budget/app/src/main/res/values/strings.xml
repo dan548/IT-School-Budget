@@ -46,7 +46,30 @@
     <string name="sum_spent">Sum:</string>
 
     <string name="choose_date">Choose date</string>
+    <string name="removing">Removing</string>
+    <string name="removing_summary">Show the alert dialog before removing</string>
 
+    <string name="titres"> Budget \u000A
+                           2 трока титров \u000A
+                           3 строка титров \u000A
+                           4 строка титров</string>
+
+    <string name="checkbox1_title">CheckBox 1</string>
+    <string name="checkbox1_summary">Summary of CheckBox 1</string>
+    <string name="list1_title">List 1</string>
+    <string name="list1_summary">Summary of List 1</string>
+    <string-array name="entries">
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+    </string-array>
+    <string-array name="entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string name="chb1">Способ удаления</string>
 
 
 </resources>

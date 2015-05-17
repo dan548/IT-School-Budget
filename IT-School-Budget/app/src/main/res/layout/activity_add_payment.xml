@@ -3,45 +3,18 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/payment_date_yo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:id="@+id/et_day"
-            android:inputType="date"
-            android:hint="@string/day"
-            android:gravity="center"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:id="@+id/et_month"
-            android:inputType="date"
-            android:hint="@string/month"
-            android:gravity="center"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/et_year"
-            android:inputType="date"
-            android:hint="@string/year"
-            android:gravity="center"/>
-
-    </LinearLayout>
-
+        style="@style/TextView"
+        android:layout_margin="5dp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et2"
+        style="@style/TextEdit"
         android:hint="@string/sum"
         android:inputType="number" />
 

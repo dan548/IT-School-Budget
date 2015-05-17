@@ -17,9 +17,7 @@ public class DatabaseBudget extends SQLiteOpenHelper{
 
         String createBudgetQuery = "CREATE table Budget (_id integer primary key autoincrement, " +
                 "budget_Surname varchar(32), budget_Name varchar(32), " +
-                "budget_Last_name varchar(32), budget_Last_payment_day integer, " +
-                "budget_Last_payment_month integer, " +
-                "budget_Last_payment_year integer , " +
+                "budget_Last_name varchar(32), budget_Last_payment_date varchar(32), " +
                 "budget_Phone_one varchar(32), " +
                 "budget_Phone_two varchar(32), " +
                 "budget_Sum integer);";

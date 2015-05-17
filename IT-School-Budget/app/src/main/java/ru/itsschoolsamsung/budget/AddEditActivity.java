@@ -66,7 +66,7 @@ public class AddEditActivity extends Activity{
             surname.setText(extras.getString("key2"));
             name.setText(extras.getString("key3"));
             lastname.setText(extras.getString("key4"));
-            payment_date.setText(payment_date_text+ " " + extras.getInt("key5") + "." + extras.getInt("key7") + "." + extras.getInt("key8"));
+            payment_date.setText(payment_date_text+ " " + extras.getString("key5"));
             payment_sum.setText(sum_payments + " " + String.valueOf(extras.getInt("key6")) + " " + rubles);
             phone1.setText(extras.getString("key9"));
             phone2.setText(extras.getString("key10"));
@@ -113,7 +113,7 @@ public class AddEditActivity extends Activity{
                 PeopleListActivity.addArrayContact(surname.getText().toString(),
                         name.getText().toString(),
                         lastname.getText().toString(),
-                        day, month, year, 0, phone1.getText().toString(),
+                        payment_date.getText().toString(), 0, phone1.getText().toString(),
                         phone2.getText().toString());
             else
                 PeopleListActivity.editContact(surname.getText().toString(),

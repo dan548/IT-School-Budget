@@ -4,6 +4,7 @@ package ru.itsschoolsamsung.budget;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -36,12 +37,26 @@ public class AddSpentActivity extends Activity {
         spent_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment dateDialog = new DatePicker();
+                DialogFragment dateDialog = new DatePickerSpent();
                 dateDialog.show(getFragmentManager(), "datePicker");
             }
         });
 
+        product.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                textView.setText(product.getText().toString());
+                return true;
+            }
+        });
 
+        sum.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                textView.setText(sum.getText().toString());
+                return true;
+            }
+        });
 
         flag = extras.getBoolean("key1");
         if(flag==false){

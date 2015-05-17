@@ -13,7 +13,8 @@
         <activity android:name=".AboutActivity"/>
         <activity android:name=".AddEditActivity"/>
         <activity android:name=".AddPaymentActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -29,6 +30,7 @@
         <activity android:name=".ChooseNumberActivity"
             android:theme="@style/Dialog"/>
         <activity android:name=".DialerActivity"/>
+        <activity android:name=".Prefs"/>
     </application>
 
 </manifest>

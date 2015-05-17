@@ -5,10 +5,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,18 +37,46 @@ public class PeopleListActivity extends Activity {
     private String surname = null;
     private String name = null;
     private String last_name = null;
-    private int day = 0;
-    private int month = 0;
-    private int year = 0;
+    private String date = null;
     private int sum = 0;
     private String phone_one;
     private String phone_two;
+    private boolean isAlertDialog = true;
+
 
 
     @Override
     protected void onResume() {
         super.onResume();
         refreshContact();
+
+
+        /*
+        // читаем стили текста из ListPreference
+        String regular = prefs.getString(getString(R.string.pref_style), "");
+        int typeface = Typeface.NORMAL;
+
+        if (regular.contains("Полужирный"))
+            typeface += Typeface.BOLD;
+
+        if (regular.contains("Курсив"))
+            typeface += Typeface.ITALIC;
+
+        // меняем настройки в EditText
+        //myEdit.setTextSize(fSize);
+        myEdit.setTypeface(null, typeface);
+
+        // читаем цвет текста из CheckBoxPreference
+        // и суммируем значения для получения дополнительньк цветов текста
+        int color = Color.BLACK;
+        if (prefs.getBoolean(getString(R.string.pref_color_red), false))
+            color += Color.RED;
+        if (prefs.getBoolean(getString(R.string.pref_color_green), false))
+            color += Color.GREEN;
+        if (prefs.getBoolean(getString(R.string.pref_color_blue), false))
+            color += Color.BLUE;
+
+        myEdit.setTextColor(color);*/
     }
 
     @Override
@@ -57,6 +87,7 @@ public class PeopleListActivity extends Activity {
         databaseBudget = new DatabaseBudget(this);
         sqLiteDatabase = databaseBudget.getWritableDatabase();
 
+        Bundle extras = getIntent().getExtras();
         intBud = new Intent(PeopleListActivity.this, AddEditActivity.class);
         intTrans = new Intent(PeopleListActivity.this, AddPaymentActivity.class);
         intChoose = new Intent(PeopleListActivity.this, ChooseNumberActivity.class);
@@ -64,10 +95,12 @@ public class PeopleListActivity extends Activity {
         listBudget = (ListView)findViewById(R.id.list_people);
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
+        isAlertDialog = extras.getBoolean("smart_remove");
 
         fab.attachToListView(listBudget);
 
         refreshContact();
+
 
         listBudget.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -98,15 +131,15 @@ public class PeopleListActivity extends Activity {
 
 
 
-    public static void addArrayContact(String surname, String name, String last_name, int day, int month, int year, int sum, String phone_one, String phone_two){
+    public static void addArrayContact(String surname, String name, String last_name, String date, int sum, String phone_one, String phone_two){
         //вставка записи в таблицу
-        String insertQuery = "INSERT INTO Budget (budget_Surname, budget_Name, budget_Last_name, budget_Last_payment_day, budget_Last_payment_month, " +
-                "budget_Last_payment_year, budget_Phone_one, budget_Phone_two, budget_Sum) VALUES " +
-                "('"+surname+"', '"+name+"', '"+last_name+"', '"+day+"', '"+month+"', '"+year+"', '"+phone_one+"', '"+phone_two+"', '"+sum+"');";
+        String insertQuery = "INSERT INTO Budget (budget_Surname, budget_Name, budget_Last_name, budget_Last_payment_date, " +
+                "budget_Phone_one, budget_Phone_two, budget_Sum) VALUES " +
+                "('"+surname+"', '"+name+"', '"+last_name+"', '"+date+"', '"+phone_one+"', '"+phone_two+"', '"+sum+"');";
         sqLiteDatabase.execSQL(insertQuery);
     }
 
-    public static void addPayment(int day, int month, int year, int sum){
+    public static void addPayment(String date, int sum){
 
 
         String query = "SELECT budget_Sum FROM Budget WHERE _id LIKE '"+budgetID+"';";
@@ -118,9 +151,7 @@ public class PeopleListActivity extends Activity {
 
         sum += money;
 
-        String queryUpdate = "UPDATE Budget SET budget_Last_payment_day = '"+day+"', " +
-                "budget_Last_payment_month = '"+month+"', " +
-                "budget_Last_payment_year = '"+year+"', " +
+        String queryUpdate = "UPDATE Budget SET budget_Last_payment_date = '"+date+"', " +
                 "budget_Sum = '"+sum+"' WHERE _id = "+budgetID+";";
         sqLiteDatabase.execSQL(queryUpdate);
     }
@@ -157,33 +188,15 @@ public class PeopleListActivity extends Activity {
                         intBud.putExtra("key2", surname);
                         intBud.putExtra("key3", name);
                         intBud.putExtra("key4", last_name);
-                        intBud.putExtra("key5", day);
+                        intBud.putExtra("key5", date);
                         intBud.putExtra("key6", sum);
-                        intBud.putExtra("key7", month);
-                        intBud.putExtra("key8", year);
                         intBud.putExtra("key9", phone_one);
                         intBud.putExtra("key10", phone_two);
                         startActivity(intBud);
                         return  true;
-                    //добавление записи
+                    //удаление записи
                     case R.id.menu2:
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(PeopleListActivity.this);
-                        alertDialog.setTitle(R.string.confirm);
-                        alertDialog.setMessage(R.string.confirm_question);
-                        alertDialog.setIcon(R.drawable.kitin);
-                        alertDialog.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                delContact();
-                            }
-                        });
-                        alertDialog.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                return;
-                            }
-                        });
-                        alertDialog.show();
+                        smartRemoveContact();
                         return  true;
                     case R.id.menu3:
                         intTrans.putExtra("key_id", budgetID);
@@ -241,16 +254,14 @@ public class PeopleListActivity extends Activity {
 
     //назначение фамилии + имени + отчества
     private void setNames(){
-        String query = "SELECT budget_Surname, budget_Name, budget_Last_name, budget_Last_payment_day, " +
-                "budget_Last_payment_month, budget_Last_payment_year, budget_Phone_one, budget_Phone_two, budget_Sum FROM Budget WHERE _id = "+budgetID+";";
+        String query = "SELECT budget_Surname, budget_Name, budget_Last_name, budget_Last_payment_date," +
+                " budget_Phone_one, budget_Phone_two, budget_Sum FROM Budget WHERE _id = "+budgetID+";";
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
         cursor.moveToFirst();
         surname = cursor.getString(cursor.getColumnIndex("budget_Surname"));
         name = cursor.getString(cursor.getColumnIndex("budget_Name"));
         last_name = cursor.getString(cursor.getColumnIndex("budget_Last_name"));
-        day = cursor.getInt(cursor.getColumnIndex("budget_Last_payment_day"));
-        month = cursor.getInt(cursor.getColumnIndex("budget_Last_payment_month"));
-        year = cursor.getInt(cursor.getColumnIndex("budget_Last_payment_year"));
+        date = cursor.getString(cursor.getColumnIndex("budget_Last_payment_date"));
         sum = cursor.getInt(cursor.getColumnIndex("budget_Sum"));
         phone_one = cursor.getString(cursor.getColumnIndex("budget_Phone_one"));
         phone_two = cursor.getString(cursor.getColumnIndex("budget_Phone_two"));
@@ -264,5 +275,29 @@ public class PeopleListActivity extends Activity {
         phone_one = cursor.getString(cursor.getColumnIndex("budget_Phone_one"));
         phone_two = cursor.getString(cursor.getColumnIndex("budget_Phone_two"));
         cursor.close();
+    }
+
+    public void smartRemoveContact(){
+        if (isAlertDialog) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(PeopleListActivity.this);
+            alertDialog.setTitle(R.string.confirm);
+            alertDialog.setMessage(R.string.confirm_question);
+            alertDialog.setIcon(R.drawable.kitin);
+            alertDialog.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    delContact();
+                }
+            });
+            alertDialog.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    return;
+                }
+            });
+            alertDialog.show();
+        } else {
+            delContact();
+        }
     }
 }

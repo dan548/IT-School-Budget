@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 
-public class DatePicker extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+public class DatePickerPayment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
 
     @Override
@@ -38,7 +38,7 @@ public class DatePicker extends DialogFragment implements DatePickerDialog.OnDat
 
     @Override
     public void onDateSet(android.widget.DatePicker view, int year, int month, int day) {
-        TextView tv = (TextView) getActivity().findViewById(R.id.spent_date_yo);
+        TextView tv = (TextView) getActivity().findViewById(R.id.payment_date_yo);
         month += 1;
         if (month < 10) {
             tv.setText(day + ".0" + month + "." + year);

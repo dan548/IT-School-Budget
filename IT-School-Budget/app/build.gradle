@@ -8,8 +8,8 @@ android {
         applicationId "ru.itsschoolsamsung.budget"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 5
-        versionName "1.0.3"
+        versionCode 6
+        versionName "1.1"
     }
     buildTypes {
         release {

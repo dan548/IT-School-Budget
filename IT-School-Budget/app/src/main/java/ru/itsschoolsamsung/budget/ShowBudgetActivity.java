@@ -32,34 +32,36 @@ public class ShowBudgetActivity extends Activity{
         String selectQuery = "SELECT spent_Sum FROM Spent;";
         Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, null);
         while (cursor.moveToNext()){
-            int field = cursor.getInt(cursor.getColumnIndex("spent_Sum"));
+            int field = cursor.getInt(cursor.getColumnIndex("budget_Sum"));
             arrayBudget.add(field);
         }
         cursor.close();
 
         int[] spentArray = convertIntegers(arrayBudget);
-        long spent_sum = 0;
-        for(int i=0; i<spentArray.length; i++) {
-            spent_sum+=spentArray[i];
+        int spent_sum = 0;
+        for (int aSpentArray : spentArray) {
+            spent_sum += aSpentArray;
         }
 
         arrayBudget2 = new ArrayList<>();
         String selectQuery2 = "SELECT budget_Sum FROM Budget;";
         Cursor cursor2 = sqLiteDatabase.rawQuery(selectQuery2, null);
         while (cursor2.moveToNext()){
-            int field = cursor.getInt(cursor.getColumnIndex("budget_Sum"));
+            int field = cursor2.getInt(cursor2.getColumnIndex("budget_Sum"));
             arrayBudget2.add(field);
         }
         cursor2.close();
 
         int[] paymentArray = convertIntegers(arrayBudget2);
-        long payments_sum = 0;
-        for(int i=0; i<paymentArray.length; i++) {
-            payments_sum+=paymentArray[i];
+        int payments_sum = 0;
+        for (int aPaymentArray : paymentArray) {
+            payments_sum += aPaymentArray;
         }
 
+        int balance;
+        balance = payments_sum - spent_sum;
 
-        textViewShow.setText(Long.toString(spent_sum - payments_sum));
+        textViewShow.setText(Integer.toString(balance));
     }
 
     public static int[] convertIntegers(ArrayList<Integer> integers){
